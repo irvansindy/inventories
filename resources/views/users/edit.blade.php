@@ -1,71 +1,57 @@
-@extends('layouts.app-master')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Update User') }}
+        </h2>
+    </x-slot>
 
-@section('content')
-    <div class="bg-light p-4 rounded">
-        <h1>Update user</h1>
-        <div class="lead">
-
+    <div class="py-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <form action="{{ route('users.update', $user->id) }}" method="post">
+                        @method('patch')
+                        @csrf
+                        <div>
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                                <input type="text" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Name" name="name" value="{{ $user->name }}">
+                            </div>
+                            <div class="mb-4">
+                                <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+                                <input type="text" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Username" name="username" value="{{ $user->username }}">
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
+                                <input type="email" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Email Address" name="email" value="{{ $user->email }}">
+                            </div>
+                            <div class="mb-4">
+                                <label for="role" class="block text-gray-700 text-sm font-bold mb-2">Role</label>
+                                <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="role" id="role">
+                                    {{-- <option value="hidden">Select Role</option> --}}
+                                    @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}" {{ in_array($role->name, $userRole) 
+                                        ? 'selected'
+                                        : '' }}>{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                                    <button type="submit" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-sky-600 text-base leading-6 font-bold text-white shadow-sm hover:bg-sky-800 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                                        Update
+                                    </button>
+                                </span>
+                                <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
+                                    <a href="{{ route('users.index') }}" class="inline-flex justify-center w-full rounded-md border border-red-300 px-4 py-2 bg-white text-base leading-6 font-bold text-red-500 shadow-sm hover:text-red-800 focus:outline-none focus:border-red-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                                        Cancel
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="container mt-4">
-            <form method="post" action="{{ route('users.update', $user->id) }}">
-                @method('patch')
-                @csrf
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input value="{{ $user->name }}" 
-                        type="text" 
-                        class="form-control" 
-                        name="name" 
-                        placeholder="Name" required>
-
-                    @if ($errors->has('name'))
-                        <span class="text-danger text-left">{{ $errors->first('name') }}</span>
-                    @endif
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input value="{{ $user->email }}"
-                        type="email" 
-                        class="form-control" 
-                        name="email" 
-                        placeholder="Email address" required>
-                    @if ($errors->has('email'))
-                        <span class="text-danger text-left">{{ $errors->first('email') }}</span>
-                    @endif
-                </div>
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input value="{{ $user->username }}"
-                        type="text" 
-                        class="form-control" 
-                        name="username" 
-                        placeholder="Username" required>
-                    @if ($errors->has('username'))
-                        <span class="text-danger text-left">{{ $errors->first('username') }}</span>
-                    @endif
-                </div>
-                <div class="mb-3">
-                    <label for="role" class="form-label">Role</label>
-                    <select class="form-control" 
-                        name="role" required>
-                        <option value="">Select role</option>
-                        @foreach($roles as $role)
-                            <option value="{{ $role->id }}"
-                                {{ in_array($role->name, $userRole) 
-                                    ? 'selected'
-                                    : '' }}>{{ $role->name }}</option>
-                        @endforeach
-                    </select>
-                    @if ($errors->has('role'))
-                        <span class="text-danger text-left">{{ $errors->first('role') }}</span>
-                    @endif
-                </div>
-
-                <button type="submit" class="btn btn-primary">Update user</button>
-                <a href="{{ route('users.index') }}" class="btn btn-default">Cancel</button>
-            </form>
-        </div>
-
     </div>
-@endsection
+</x-app-layout>

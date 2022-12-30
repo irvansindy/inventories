@@ -1,4 +1,4 @@
-@extends('layouts.app-master')
+{{-- @extends('layouts.app-master')
 
 @section('content')
     <div class="bg-light p-4 rounded">
@@ -31,4 +31,12 @@
         <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-info">Edit</a>
         <a href="{{ route('roles.index') }}" class="btn btn-default">Back</a>
     </div>
-@endsection
+@endsection --}}
+
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ ucfirst($role->name) }} Role
+        </h2>
+    </x-slot>
+</x-app-layout>

@@ -1,27 +1,44 @@
-@extends('layouts.app-master')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('User Detail') }}
+        </h2>
+    </x-slot>
 
-@section('content')
-    <div class="bg-light p-4 rounded">
-        <h1>Show user</h1>
-        <div class="lead">
-
+    <div class="py-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <form>
+                        <div>
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                                <input type="text" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Name" name="name" value="{{ $user->name }}">
+                            </div>
+                            <div class="mb-4">
+                                <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+                                <input type="text" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Username" name="username" value="{{ $user->username }}">
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
+                                <input type="email" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Email Address" name="email" value="{{ $user->email }}">
+                            </div>
+                            <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                                    <a href="{{ route('users.edit', $user->id) }}" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-sky-600 text-base leading-6 font-bold text-white shadow-sm hover:bg-sky-800 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                                        Edit
+                                    </a>
+                                </span>
+                                <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
+                                    <a href="{{ route('users.index') }}" class="inline-flex justify-center w-full rounded-md border border-red-300 px-4 py-2 bg-white text-base leading-6 font-bold text-red-500 shadow-sm hover:text-red-800 focus:outline-none focus:border-red-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                                        Cancel
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="container mt-4">
-            <div>
-                Name: {{ $user->name }}
-            </div>
-            <div>
-                Email: {{ $user->email }}
-            </div>
-            <div>
-                Username: {{ $user->username }}
-            </div>
-        </div>
-
     </div>
-    <div class="mt-4">
-        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">Edit</a>
-        <a href="{{ route('users.index') }}" class="btn btn-default">Back</a>
-    </div>
-@endsection
+</x-app-layout>

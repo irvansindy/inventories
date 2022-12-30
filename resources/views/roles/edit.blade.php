@@ -1,4 +1,4 @@
-@extends('layouts.app-master')
+{{-- @extends('layouts.app-master')
 
 @section('content')
     <div class="bg-light p-4 rounded">
@@ -84,4 +84,59 @@
             });
         });
     </script>
-@endsection
+@endsection --}}
+
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Update Role') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <form action="{{ route('roles.update', $role->id) }}" method="post">
+                        @method('patch')
+                        @csrf
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                            <input type="text" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Name" name="name" value="{{ $role->name }}">
+                        </div>
+                        <div class="mb-4">
+                            <label for="permission" class="block text-gray-700 text-sm font-bold mb-2">Assign Permissions</label>
+                            <table class="table-fixed w-full">
+                                <thead>
+                                    <tr>
+                                        <th class="px-4 py-2"><input type="checkbox" name="all_permission"></th>
+                                        <th class="px-4 py-2">Name</th>
+                                        <th class="px-4 py-2">Guard</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($permissions as $permission)
+                                        <tr>
+                                            <th class="px-4 py-2">
+                                                <input type="checkbox" 
+                                                name="permission[{{ $permission->name }}]"
+                                                value="{{ $permission->name }}"
+                                                class='permission'
+                                                {{ in_array($permission->name, $rolePermissions) 
+                                                    ? 'checked'
+                                                    : '' }}>
+                                            </th>
+                                            <td class="px-4-py-2">{{ $permission->name }}</td>
+                                            <td class="px-4-py-2">{{ $permission->guard_name }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
