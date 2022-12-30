@@ -1,26 +1,26 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl leading-tight">
             {{ __('User Detail') }}
         </h2>
     </x-slot>
 
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg dark:bg-dark-eval-1">
+                <div class="p-6 bg-white border-d border-gray-100 dark:bg-dark-eval-1">
                     <form>
                         <div>
                             <div class="mb-4">
-                                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                                <label for="name" class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-100">Name</label>
                                 <input type="text" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Name" name="name" value="{{ $user->name }}">
                             </div>
                             <div class="mb-4">
-                                <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+                                <label for="username" class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-100">Username</label>
                                 <input type="text" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Username" name="username" value="{{ $user->username }}">
                             </div>
                             <div class="mb-4">
-                                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
+                                <label for="email" class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-100">Email Address</label>
                                 <input type="email" class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Email Address" name="email" value="{{ $user->email }}">
                             </div>
                             <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
@@ -30,7 +30,7 @@
                                     </a>
                                 </span>
                                 <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
-                                    <a href="{{ route('users.index') }}" class="inline-flex justify-center w-full rounded-md border border-red-300 px-4 py-2 bg-white text-base leading-6 font-bold text-red-500 shadow-sm hover:text-red-800 focus:outline-none focus:border-red-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                                    <a href="{{ route('users.index') }}" class="inline-flex justify-center w-full rounded-md border border-red-300 hover:border-red-500 px-4 py-2 bg-white dark:bg-dark-eval-2 text-base leading-6 font-bold text-red-500 shadow-sm hover:text-red-800 focus:outline-none focus:border-red-500 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                                         Cancel
                                     </a>
                                 </span>
